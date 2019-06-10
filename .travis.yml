@@ -3,9 +3,9 @@ branches:
     - dev
 language: cpp
 os:
+  - windows
   - linux
   - osx
-  - windows
 dist: xenial
 addons:
   apt:
@@ -21,15 +21,15 @@ addons:
       - ccache
 install:
   - if [ $TRAVIS_OS_NAME = windows ]; then choco install ninja; fi
-cache: ccache
+cache: false
 script:
   - ./tools/import-upstream.sh
   - ( cd src; ./get-clang.sh )
-  - ccache -s
+  - # ccache -s
   - ( cd src; ./build.sh )
-  - ccache -s
+  - # ccache -s
   - ./tests/basic.sh src/out/Release/naive
-  - ls -l /src/out/Release/
+  - ls -l src/out/Release/
   - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME"
   - mkdir $BUILD_NAME
   - cp src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
