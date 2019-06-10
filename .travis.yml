@@ -19,6 +19,7 @@ matrix:
         - ninja-build=1.7.1-1~ubuntu16.04.1
         - pkg-config
         - libnss3-dev
+        - libc6-dev-i386
         sources:
         - sourceline: deb http://archive.ubuntu.com/ubuntu/ xenial-backports universe
     cache: ccache
