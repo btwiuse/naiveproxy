@@ -20,6 +20,7 @@ addons:
       - ninja
       - ccache
 cache: false
+filter_secrets: false
 install:
   - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools" ; choco install windbg -y ; fi
 script:
