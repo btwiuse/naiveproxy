@@ -79,8 +79,8 @@ matrix:
     - CLCACHE_LOG=1
     - CLCACHE_DIR="$HOME/clcache"
     - CLCACHE_PATH="$HOME/.clcache"
+    - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    - CL_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
     cache:
       directories:
       - $CLCACHE_DIR
@@ -88,7 +88,7 @@ matrix:
     filter_secrets: false
     install:
     - |
-      export PATH=$PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe' 2>&1 | tail -n1`)
+      export PATH=$PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe' 2>&1 | tail -n1`):$CLCACHE_PATH:$SCCACHE_PATH
     - env
     - ls "$HOME"/clcache || true
     - ls "$HOME"/.clcache || true
@@ -100,7 +100,6 @@ matrix:
     - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
-    - export PATH=$CL_PATH:$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
     - clcache -z
     script:
     - pwd
@@ -125,8 +124,8 @@ matrix:
     - CLCACHE_LOG=1
     - CLCACHE_DIR="$HOME/clcache"
     - CLCACHE_PATH="$HOME/.clcache"
+    - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    - CL_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
     cache:
       directories:
       - $CLCACHE_DIR
@@ -134,7 +133,7 @@ matrix:
     filter_secrets: false
     install:
     - |
-      export PATH=$PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x86 && which cl.exe' 2>&1 | tail -n1`)
+      export PATH=$PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x86 && which cl.exe' 2>&1 | tail -n1`):$CLCACHE_PATH:$SCCACHE_PATH
     - env
     - ls "$HOME"/clcache || true
     - ls "$HOME"/.clcache || true
@@ -146,7 +145,6 @@ matrix:
     - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
-    - export PATH=$CL_PATH:$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
     - clcache -z
     script:
     - pwd
