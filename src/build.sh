@@ -29,11 +29,13 @@ elif [ -f "$HOME"/.cargo/bin/sccache* ]; then
   export PATH="$PATH:$HOME/.cargo/bin"
   flags="$flags"'
    cc_wrapper="sccache"'
-elif [ -d "$HOME"/clcache* ]; then
+elif [ -f "$HOME"/clcache/clcache* ]; then
   export PATH="$PATH:$HOME/clcache"
   flags="$flags"'
    cc_wrapper="clcache"'
 fi
+
+echo "using ccache: $cc_wrapper"
 
 flags="$flags"'
   is_clang=true
