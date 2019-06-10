@@ -22,7 +22,7 @@ fi
 ls -l ~/.cargo/bin || true
 ls -l ~/clcache || true
 ls -l $HOME/.cargo/bin || true
-ls -l $HOME/clcache || true
+ls -l $HOME/.clcache || true
 
 if which ccache >/dev/null 2>&1; then
   export CCACHE_SLOPPINESS=time_macros
@@ -30,7 +30,7 @@ if which ccache >/dev/null 2>&1; then
   export CCACHE_CPP2=yes
   flags="$flags"'
    cc_wrapper="ccache"'
-elif [[ -f "$HOME/clcache/clcache.exe" ]]; then
+elif [[ -f "$HOME/.clcache/clcache.exe" ]]; then
   export PATH="$PATH:$HOME/clcache"
   flags="$flags"'
    cc_wrapper="clcache"'
