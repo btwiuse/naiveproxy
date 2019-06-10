@@ -88,7 +88,7 @@ matrix:
     filter_secrets: false
     install:
     - |
-      export PATH=PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe' 2>&1 | tail -n1`)
+      export PATH=$PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe' 2>&1 | tail -n1`)
     - env
     - ls "$HOME"/clcache || true
     - ls "$HOME"/.clcache || true
@@ -109,7 +109,6 @@ matrix:
     - ( cd src; ./get-clang.sh )
     - clcache -s
     - # "~/.cargo/bin/sccache -s ||:"
-    - cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe'
     - ( cd src; ./build.sh )
     - clcache -s
     - # "~/.cargo/bin/sccache -s ||:"
@@ -135,7 +134,7 @@ matrix:
     filter_secrets: false
     install:
     - |
-      export PATH=PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x86 && which cl.exe' 2>&1 | tail -n1`)
+      export PATH=$PATH:$(dirname `cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x86 && which cl.exe' 2>&1 | tail -n1`)
     - env
     - ls "$HOME"/clcache || true
     - ls "$HOME"/.clcache || true
@@ -146,7 +145,7 @@ matrix:
     - "du -sh /c/Users/travis/AppData/Local/Mozilla/sccache/* || true"
     - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
-    - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip -y > /dev/null )"
+    - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
     - export PATH=$CL_PATH:/c/Users/travis/clcache:/c/Users/travis/.cargo/bin:$PATH
     - clcache -z
     script:
