@@ -21,7 +21,7 @@ addons:
       - ccache
 cache: false
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then export PATH="$PATH:/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin" ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then ls "/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"; ls "/c/Program Files (x86)/Microsoft Visual Studio/2017"; export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin" ; fi
 script:
   - ./tools/import-upstream.sh
   - ( cd src; ./get-clang.sh )
