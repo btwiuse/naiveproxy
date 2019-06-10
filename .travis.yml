@@ -54,7 +54,7 @@ matrix:
     filter_secrets: false
     install:
     - export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    - "choco install ninja windows-sdk-10-version-1809-windbg windows-sdk-10-version-1809-all 7zip -y"
+    - "choco install ninja windows-sdk-10-version-1809-all -y"
     - ( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip > /dev/null )
     - export PATH=$CLCACHE_PATH:$PATH
     - clcache -z
@@ -88,7 +88,7 @@ matrix:
     filter_secrets: false
     install:
     - export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    - "choco install ninja windows-sdk-10-version-1809-windbg windows-sdk-10-version-1809-all 7zip -y"
+    - "choco install ninja windows-sdk-10-version-1809-all -y"
     - ( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip > /dev/null )
     - export PATH=$CLCACHE_PATH:$PATH
     - clcache -z
