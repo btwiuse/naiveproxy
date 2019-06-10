@@ -88,6 +88,7 @@ matrix:
     filter_secrets: false
     install:
     - env
+    - cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe'
     - ls "$HOME"/clcache || true
     - ls "$HOME"/.clcache || true
     - ls $LOCALAPPDATA || true
@@ -107,6 +108,7 @@ matrix:
     - ( cd src; ./get-clang.sh )
     - clcache -s
     - # "~/.cargo/bin/sccache -s ||:"
+    - cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe'
     - ( cd src; ./build.sh )
     - clcache -s
     - # "~/.cargo/bin/sccache -s ||:"
