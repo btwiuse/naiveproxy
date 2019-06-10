@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 export TMPDIR="$PWD/tmp"
 mkdir -p "$TMPDIR"
 
-if [ "$1" = debug ]; then
+if [[ "$1" = debug ]]; then
   out=out/Debug
   flags="$EXTRA_FLAGS
     is_debug=true
@@ -30,11 +30,11 @@ if which ccache >/dev/null 2>&1; then
   export CCACHE_CPP2=yes
   flags="$flags"'
    cc_wrapper="ccache"'
-elif [ -f "$HOME"/clcache/clcache* ]; then
+elif [[ -f "$HOME/clcache/clcache.exe" ]]; then
   export PATH="$PATH:$HOME/clcache"
   flags="$flags"'
    cc_wrapper="clcache"'
-elif [ -f "$HOME"/.cargo/bin/sccache* ]; then
+elif [[ -f "$HOME/.cargo/bin/sccache.exe" ]]; then
   export PATH="$PATH:$HOME/.cargo/bin"
   flags="$flags"'
    cc_wrapper="sccache"'
@@ -67,7 +67,7 @@ flags="$flags"'
   include_transport_security_state_preload_list=false
 '
 
-if [ "$(uname)" = Linux ]; then
+if [[ "$(uname)" = Linux ]]; then
   flags="$flags"'
     use_ozone=true
     ozone_auto_platforms=false
