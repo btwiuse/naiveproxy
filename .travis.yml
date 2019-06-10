@@ -41,7 +41,7 @@ matrix:
   - name: Windows 64-bit
     os: windows
     env:
-    - PLATFORM=x86
+    - PLATFORM=x64
     - CLCACHE_PATH="$HOME/clcache"
     - VS15=true
     - CCACHE_TEMPDIR=/tmp/.ccache-temp
