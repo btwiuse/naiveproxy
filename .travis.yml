@@ -61,7 +61,7 @@ matrix:
     - ccache -s
     - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh )
     - ccache -s
-    - ./tests/basic.sh src/out/Release/naive ;true
+    - # ./tests/basic.sh src/out/Release/naive ;true
     - ls -l src/out/Release/ ;true
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$ARCH" ;true
     - mkdir $BUILD_NAME ;true
