@@ -24,18 +24,16 @@ ls -l ~/.clcache || true
 ls -l $HOME/.cargo/bin || true
 ls -l $HOME/.clcache || true
 
-if which ccache >/dev/null 2>&1; then
+if which ccache; then
   export CCACHE_SLOPPINESS=time_macros
   export CCACHE_BASEDIR="$PWD"
   export CCACHE_CPP2=yes
   flags="$flags"'
    cc_wrapper="ccache"'
-elif [[ -f "$HOME/.clcache/clcache.exe" ]]; then
-  export PATH="$PATH:$HOME/.clcache"
+elif which clcache; then
   flags="$flags"'
    cc_wrapper="clcache"'
-elif [[ -f "$HOME/.cargo/bin/sccache.exe" ]]; then
-  export PATH="$PATH:$HOME/.cargo/bin"
+elif which sccache; then
   flags="$flags"'
    cc_wrapper="sccache"'
 fi
