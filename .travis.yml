@@ -87,8 +87,8 @@ matrix:
     install:
     - env
     - pwd
-    - "choco install ninja windows-sdk-10-version-1809-all netcat python git -y"
-    - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+    - "choco install netcat -y" # windows-sdk-10-version-1809-all python 
+    - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git || true
     script:
     - pwd
     - env
