@@ -78,13 +78,14 @@ matrix:
     - PLATFORM=x64
     - CLCACHE_LOG=1
     - CLCACHE_DIR="$HOME/clcache"
+    - SCCACHE_DIR=/c/Users/travis/AppData/Local/Mozilla/sccache
     - CLCACHE_PATH="$HOME/.clcache"
     - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     cache:
       directories:
       - $CLCACHE_DIR
-      - /c/Users/travis/AppData/Local/Mozilla/sccache
+      - $SCCACHE_DIR
     filter_secrets: false
     install:
     - |
@@ -123,13 +124,14 @@ matrix:
     - PLATFORM=x86
     - CLCACHE_LOG=1
     - CLCACHE_DIR="$HOME/clcache"
+    - SCCACHE_DIR=/c/Users/travis/AppData/Local/Mozilla/sccache
     - CLCACHE_PATH="$HOME/.clcache"
     - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     cache:
       directories:
       - $CLCACHE_DIR
-      - /c/Users/travis/AppData/Local/Mozilla/sccache
+      - $SCCACHE_DIR
     filter_secrets: false
     install:
     - |
