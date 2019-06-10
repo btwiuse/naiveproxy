@@ -139,7 +139,7 @@ matrix:
     filter_secrets: false
     install:
     - |
-      export CLCACHE_CL=`cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 && which cl.exe' 2>&1 | tail -n1`
+      export CLCACHE_CL=`cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"   x86 && which cl.exe' 2>&1 | tail -n1`
     - |
       export PATH=$PATH:$(dirname $CLCACHE_CL):$CLCACHE_PATH:$SCCACHE_PATH
     - env
