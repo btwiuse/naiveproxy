@@ -27,9 +27,17 @@ artifacts:
 deploy:
   - provider: GitHub
     auth_token:
-      secure: h+qwIoof/3ET7LOldWwlb6XQLmpxYPuaZL4YcFQ8QyclfBrnywzwzDaSqdE2unPg
+      secure: 3vfN0sUyeKphZbkJKnb9N4F6LdU7pG1fNkAQcBxgq5UqmLUsEzRYegTeySZ3+yWj
     artifact: $(BUILD_NAME).zip
     prerelease: true
     force_update: true
     on:
       APPVEYOR_REPO_TAG: true
+  - provider: GitHub
+    auth_token:
+      secure: 3vfN0sUyeKphZbkJKnb9N4F6LdU7pG1fNkAQcBxgq5UqmLUsEzRYegTeySZ3+yWj
+    artifact: $(BUILD_NAME).zip
+    prerelease: true
+    force_update: true
+    on:
+      APPVEYOR_REPO_TAG: false
