@@ -6,6 +6,8 @@ deploy:
   prerelease: true
   provider: releases
   skip_cleanup: true
+  on:
+    all_branches: true
 language: cpp
 matrix:
   include:
@@ -23,6 +25,8 @@ matrix:
     dist: xenial
     env: ARCH=x86_64
     script:
+    - pwd
+    - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
@@ -36,37 +40,67 @@ matrix:
     - tar cJf $BUILD_NAME.tar.xz $BUILD_NAME
   - name: Windows 64-bit
     os: windows
-    cache: false
-    env: ARCH=x86_64
+    env:
+    - PLATFORM=x86
+    - CLCACHE_PATH="$HOME/clcache"
+    - VS15=true
+    - CCACHE_TEMPDIR=/tmp/.ccache-temp
+    - CCACHE_COMPRESS=1
+    - CCACHE_DIR=$HOME/.ccache
+    cache:
+      directories:
+      - $CLCACHE_PATH
     filter_secrets: false
     install:
     - export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    - choco install ninja windows-sdk-10-version-1809-windbg windows-sdk-10-version-1809-all -y
+    - "choco install ninja windows-sdk-10-version-1809-windbg windows-sdk-10-version-1809-all 7zip -y"
+    - ( mkdir -p $CLCACHE_PATH && cd clcache && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip > /dev/null )
+    - export PATH=$CLCACHE_PATH:$PATH
+    - clcache -z
     script:
+    - pwd
+    - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
+    - clcache -s
     - ( cd src; ./build.sh )
+    - clcache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-64bit"
+    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     - mkdir $BUILD_NAME
     - cp -v src/out/Release/naive.exe src/config.json LICENSE USAGE.txt $BUILD_NAME
     - tar cvf $BUILD_NAME.tar $BUILD_NAME
   - name: Windows 32-bit
     os: windows
-    cache: false
-    env: ARCH=x86
+    env:
+    - PLATFORM=x86
+    - CLCACHE_PATH="$HOME/clcache"
+    - VS15=true
+    - CCACHE_TEMPDIR=/tmp/.ccache-temp
+    - CCACHE_COMPRESS=1
+    - CCACHE_DIR=$HOME/.ccache
+    cache:
+      directories:
+      - $CLCACHE_PATH
     filter_secrets: false
     install:
     - export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
-    - choco install ninja windows-sdk-10-version-1809-windbg windows-sdk-10-version-1809-all -y
+    - "choco install ninja windows-sdk-10-version-1809-windbg windows-sdk-10-version-1809-all 7zip -y"
+    - ( mkdir -p $CLCACHE_PATH && cd clcache && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip > /dev/null )
+    - export PATH=$CLCACHE_PATH:$PATH
+    - clcache -z
     script:
+    - pwd
+    - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
+    - clcache -s
     - ( cd src; ./build.sh )
+    - clcache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-32bit"
+    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     - mkdir $BUILD_NAME
     - cp -v src/out/Release/naive.exe src/config.json LICENSE USAGE.txt $BUILD_NAME
     - tar cvf $BUILD_NAME.tar $BUILD_NAME
@@ -81,6 +115,8 @@ matrix:
     env: ARCH=x86_64
     osx_image: xcode9.2
     script:
+    - pwd
+    - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s

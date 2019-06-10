@@ -29,6 +29,10 @@ elif [ -f "$HOME"/.cargo/bin/sccache* ]; then
   export PATH="$PATH:$HOME/.cargo/bin"
   flags="$flags"'
    cc_wrapper="sccache"'
+elif [ -d "$HOME"/clcache* ]; then
+  export PATH="$PATH:$HOME/clcache"
+  flags="$flags"'
+   cc_wrapper="clcache"'
 fi
 
 flags="$flags"'
