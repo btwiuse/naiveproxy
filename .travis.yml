@@ -134,6 +134,7 @@ matrix:
     filter_secrets: false
     install:
     - env
+    - cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x86 && which cl.exe'
     - ls "$HOME"/clcache || true
     - ls "$HOME"/.clcache || true
     - ls $LOCALAPPDATA || true
