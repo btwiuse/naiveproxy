@@ -22,7 +22,7 @@ addons:
 cache: false
 filter_secrets: false
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools" ; choco install windbg -y ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools" ; choco install ninja windbg -y ; fi
 script:
   - ./tools/import-upstream.sh
   - ( cd src; ./get-clang.sh )
