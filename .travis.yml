@@ -30,7 +30,7 @@ matrix:
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
-    - ( cd src; env EXTRA_FLAGS="target_cpu=x86" ./build.sh )
+    - ( cd src; env EXTRA_FLAGS=target_cpu=x86 ./build.sh )
     - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
@@ -65,7 +65,7 @@ matrix:
     - ( cd src; ./get-clang.sh )
     - clcache -s
     - "~/.cargo/bin/sccache -s ||:"
-    - ( cd src; env EXTRA_FLAGS="target_cpu=$PLATFORM" ./build.sh )
+    - ( cd src; env ./build.sh )
     - clcache -s
     - "~/.cargo/bin/sccache -s ||:"
     - ./tests/basic.sh src/out/Release/naive
@@ -101,7 +101,7 @@ matrix:
     - ( cd src; ./get-clang.sh )
     - clcache -s
     - "~/.cargo/bin/sccache -s ||:"
-    - ( cd src; env EXTRA_FLAGS="target_cpu=$PLATFORM" ./build.sh )
+    - ( cd src; env EXTRA_FLAGS=target_cpu=x86 ./build.sh )
     - clcache -s
     - "~/.cargo/bin/sccache -s ||:"
     - ./tests/basic.sh src/out/Release/naive

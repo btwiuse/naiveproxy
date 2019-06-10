@@ -35,7 +35,7 @@ elif [ -f "$HOME"/clcache/clcache* ]; then
    cc_wrapper="clcache"'
 fi
 
-echo "using ccache: $cc_wrapper"
+echo "using cc_wrapper: $cc_wrapper"
 
 flags="$flags"'
   is_clang=true
