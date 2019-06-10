@@ -39,5 +39,4 @@ deploy:
   name: $TRAVIS_BRANCH
   prerelease: true
   on:
-    tags: true
     all_branches: true
