@@ -20,7 +20,7 @@ else
 fi
 
 ls -l ~/.cargo/bin || true
-ls -l ~/clcache || true
+ls -l ~/.clcache || true
 ls -l $HOME/.cargo/bin || true
 ls -l $HOME/.clcache || true
 
@@ -31,7 +31,7 @@ if which ccache >/dev/null 2>&1; then
   flags="$flags"'
    cc_wrapper="ccache"'
 elif [[ -f "$HOME/.clcache/clcache.exe" ]]; then
-  export PATH="$PATH:$HOME/clcache"
+  export PATH="$PATH:$HOME/.clcache"
   flags="$flags"'
    cc_wrapper="clcache"'
 elif [[ -f "$HOME/.cargo/bin/sccache.exe" ]]; then
