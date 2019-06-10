@@ -73,23 +73,16 @@ matrix:
     env:
     - PLATFORM=x64
     - CLCACHE_PATH="$HOME/clcache"
-    - VS15=true
-    - CCACHE_TEMPDIR=/tmp/.ccache-temp
-    - CCACHE_COMPRESS=1
-    - CCACHE_DIR=$HOME/.ccache
+    - CLCACHE_DIR="$HOME/.clcache"
+    - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     cache:
       directories:
-      - $CLCACHE_PATH
       - $CLCACHE_DIR
       - /c/Users/travis/AppData/Local/Mozilla/sccache/cache
     filter_secrets: false
     install:
-    - echo "$HOME"
-    - echo "%HOME%"
-    - echo "%LOCALAPPDATA%\Mozilla\sccache"
-    - ls "%HOME%"/clcache || true
+    - env
     - ls "$HOME"/clcache || true
-    - export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
     - export PATH=$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
@@ -113,26 +106,18 @@ matrix:
   - name: Windows 32-bit
     os: windows
     env:
-    - ARCH=x86
     - PLATFORM=x86
     - CLCACHE_PATH="$HOME/clcache"
-    - VS15=true
-    - CCACHE_TEMPDIR=/tmp/.ccache-temp
-    - CCACHE_COMPRESS=1
-    - CCACHE_DIR=$HOME/.ccache
+    - CLCACHE_DIR="$HOME/.clcache"
+    - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     cache:
       directories:
-      - $CLCACHE_PATH
       - $CLCACHE_DIR
       - /c/Users/travis/AppData/Local/Mozilla/sccache/cache
     filter_secrets: false
     install:
-    - echo "$HOME"
-    - echo "%HOME%"
-    - echo "%LOCALAPPDATA%\Mozilla\sccache"
-    - ls "%HOME%"/clcache || true
+    - env
     - ls "$HOME"/clcache || true
-    - export GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip -y > /dev/null )"
     - export PATH=$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
