@@ -31,7 +31,8 @@ if which ccache; then
   flags="$flags"'
    cc_wrapper="ccache"'
 elif which clcache; then
-  export CFLAGS="$CFLAGS -std=c99"
+  export CFLAGS="$CFLAGS -std=c++11"
+  export CXXFLAGS="$CXXFLAGS -std=c++11"
   flags="$flags"'
    cc_wrapper="clcache"'
 elif which sccache; then
