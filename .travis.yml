@@ -59,7 +59,7 @@ matrix:
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
-    - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh )
+    - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh ) ;true
     - ccache -s
     - # ./tests/basic.sh src/out/Release/naive ;true
     - ls -l src/out/Release/ ;true
@@ -78,7 +78,7 @@ matrix:
     cache:
       directories:
       - $CLCACHE_DIR
-      - /c/Users/travis/AppData/Local/Mozilla/sccache/cache
+      - /c/Users/travis/AppData/Local/Mozilla/sccache
     filter_secrets: false
     install:
     - env
@@ -117,7 +117,7 @@ matrix:
     cache:
       directories:
       - $CLCACHE_DIR
-      - /c/Users/travis/AppData/Local/Mozilla/sccache/cache
+      - /c/Users/travis/AppData/Local/Mozilla/sccache
     filter_secrets: false
     install:
     - env
