@@ -79,6 +79,7 @@ matrix:
     - CLCACHE_PATH="$HOME/clcache"
     - CLCACHE_DIR="$HOME/.clcache"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
+    - CL_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
     cache:
       directories:
       - $CLCACHE_DIR
@@ -96,7 +97,7 @@ matrix:
     - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
-    - export PATH=/c/Users/travis/clcache:/c/Users/travis/.cargo/bin:$PATH
+    - export PATH=$CL_PATH:/c/Users/travis/clcache:/c/Users/travis/.cargo/bin:$PATH
     - clcache -z
     script:
     - pwd
@@ -121,6 +122,7 @@ matrix:
     - CLCACHE_PATH="$HOME/clcache"
     - CLCACHE_DIR="$HOME/.clcache"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
+    - CL_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
     cache:
       directories:
       - $CLCACHE_DIR
@@ -138,7 +140,7 @@ matrix:
     - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip -y > /dev/null )"
-    - export PATH=$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
+    - export PATH=$CL_PATH:$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
     - clcache -z
     script:
     - pwd
