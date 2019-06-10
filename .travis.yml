@@ -83,6 +83,10 @@ matrix:
     install:
     - env
     - ls "$HOME"/clcache || true
+    - ls "$HOME"/.clcache || true
+    - ls $LOCALAPPDATA || true
+    - ls /c/Users/travis/AppData/Local || true
+    - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
     - export PATH=$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
@@ -118,6 +122,10 @@ matrix:
     install:
     - env
     - ls "$HOME"/clcache || true
+    - ls "$HOME"/.clcache || true
+    - ls $LOCALAPPDATA || true
+    - ls /c/Users/travis/AppData/Local || true
+    - ls 'C:\Users\travis\AppData\Local' || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
     - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x clcache-4.2.0.zip -y > /dev/null )"
     - export PATH=$CLCACHE_PATH:/c/Users/travis/.cargo/bin:$PATH
