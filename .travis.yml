@@ -20,6 +20,7 @@ matrix:
         - pkg-config
         - libnss3-dev
         - libc6-dev-i386
+        - linux-libc-dev:i386
         sources:
         - sourceline: deb http://archive.ubuntu.com/ubuntu/ xenial-backports universe
     cache: ccache
