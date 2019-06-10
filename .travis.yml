@@ -76,8 +76,9 @@ matrix:
     os: windows
     env:
     - PLATFORM=x64
-    - CLCACHE_PATH="$HOME/clcache"
-    - CLCACHE_DIR="$HOME/.clcache"
+    - CLCACHE_LOG=1
+    - CLCACHE_DIR="$HOME/clcache"
+    - CLCACHE_PATH="$HOME/.clcache"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     - CL_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
     cache:
@@ -119,8 +120,9 @@ matrix:
     os: windows
     env:
     - PLATFORM=x86
-    - CLCACHE_PATH="$HOME/clcache"
-    - CLCACHE_DIR="$HOME/.clcache"
+    - CLCACHE_LOG=1
+    - CLCACHE_DIR="$HOME/clcache"
+    - CLCACHE_PATH="$HOME/.clcache"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     - CL_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
     cache:
