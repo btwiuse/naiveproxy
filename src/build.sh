@@ -19,6 +19,9 @@ else
     symbol_level=0"
 fi
 
+ls -l ~/.cargo/bin || true
+ls -l ~/clcache || true
+
 if which ccache >/dev/null 2>&1; then
   export CCACHE_SLOPPINESS=time_macros
   export CCACHE_BASEDIR="$PWD"
