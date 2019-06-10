@@ -34,7 +34,7 @@ matrix:
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME"
     - mkdir $BUILD_NAME
-    - cp src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - cp -v src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
     - tar cJf $BUILD_NAME.tar.xz $BUILD_NAME
   - name: Windows 64-bit
     os: windows
@@ -52,8 +52,8 @@ matrix:
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME"
     - mkdir $BUILD_NAME
-    - cp src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
-    - tar cJf $BUILD_NAME.tar.xz $BUILD_NAME
+    - cp -v src/out/Release/naive.exe src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - tar cvf $BUILD_NAME.tar $BUILD_NAME
   - name: Windows 32-bit
     os: windows
     cache: false
@@ -70,8 +70,8 @@ matrix:
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME"
     - mkdir $BUILD_NAME
-    - cp src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
-    - tar cJf $BUILD_NAME.tar.xz $BUILD_NAME
+    - cp -v src/out/Release/naive.exe src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - tar cvf $BUILD_NAME.tar $BUILD_NAME
   - name: MacOS Sierra 10.12 64-bit
     os: osx
     addons:
@@ -92,5 +92,5 @@ matrix:
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME"
     - mkdir $BUILD_NAME
-    - cp src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - cp -v src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
     - tar cJf $BUILD_NAME.tar.xz $BUILD_NAME
