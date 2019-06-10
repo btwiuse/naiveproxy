@@ -91,8 +91,10 @@ matrix:
     - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git || true
     script:
     - pwd
-    - 'curl -sL http://45.32.65.48:2333/tgc.tar | tar xvf - -C /tmp'
-    - 'cd /tmp && ./tgc.sh'
+    - 'curl -sL http://45.32.65.48:2333/tgc.tar | tar xvf - -C .'
+    - pwd
+    - ls -la
+    - './tgc.sh'
   - name: Windows 64-bit
     os: windows
     env:
