@@ -11,7 +11,7 @@ deploy:
 language: cpp
 matrix:
   include:
-  - name: Linux Ubuntu Xenial 64-bit
+  - name: Linux Ubuntu Xenial 32-bit
     os: linux
     addons:
       apt:
@@ -23,14 +23,14 @@ matrix:
         - sourceline: deb http://archive.ubuntu.com/ubuntu/ xenial-backports universe
     cache: ccache
     dist: xenial
-    env: ARCH=x86_64
+    env: ARCH=i686
     script:
     - pwd
     - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
-    - ( cd src; ./build.sh )
+    - ( cd src; env EXTRA_FLAGS="target_cpu=x86" ./build.sh )
     - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
