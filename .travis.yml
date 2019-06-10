@@ -103,11 +103,11 @@ matrix:
     - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
-    - # clcache -s
-    - "~/.cargo/bin/sccache -s ||:"
+    - clcache -s
+    - # "~/.cargo/bin/sccache -s ||:"
     - ( cd src; ./build.sh )
-    - # clcache -s
-    - "~/.cargo/bin/sccache -s ||:"
+    - clcache -s
+    - # "~/.cargo/bin/sccache -s ||:"
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
@@ -145,11 +145,11 @@ matrix:
     - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
-    - # clcache -s
-    - "~/.cargo/bin/sccache -s ||:"
+    - clcache -s
+    - # "~/.cargo/bin/sccache -s ||:"
     - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh )
-    - # clcache -s
-    - "~/.cargo/bin/sccache -s ||:"
+    - clcache -s
+    - # "~/.cargo/bin/sccache -s ||:"
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"

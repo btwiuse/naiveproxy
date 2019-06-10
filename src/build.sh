@@ -30,14 +30,14 @@ if which ccache >/dev/null 2>&1; then
   export CCACHE_CPP2=yes
   flags="$flags"'
    cc_wrapper="ccache"'
-elif [ -f "$HOME"/.cargo/bin/sccache* ]; then
-  export PATH="$PATH:$HOME/.cargo/bin"
-  flags="$flags"'
-   cc_wrapper="sccache"'
 elif [ -f "$HOME"/clcache/clcache* ]; then
   export PATH="$PATH:$HOME/clcache"
   flags="$flags"'
    cc_wrapper="clcache"'
+elif [ -f "$HOME"/.cargo/bin/sccache* ]; then
+  export PATH="$PATH:$HOME/.cargo/bin"
+  flags="$flags"'
+   cc_wrapper="sccache"'
 fi
 
 echo "using flags: $flags"
