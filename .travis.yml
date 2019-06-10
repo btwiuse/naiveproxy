@@ -20,6 +20,11 @@ addons:
       - ninja
       - ccache
 cache: false
+install:
+  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then
+      export PATH="$PATH:/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
+      # export CMAKE_GENERATOR="Visual Studio 15 2017";
+    fi
 script:
   - ./tools/import-upstream.sh
   - ( cd src; ./get-clang.sh )
