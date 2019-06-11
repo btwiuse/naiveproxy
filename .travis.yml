@@ -77,6 +77,7 @@ matrix:
       - $SCCACHE_DIR
     filter_secrets: false
     install:
+    - export CCACHE_LOGFILE=/dev/stderr
     - ls -l ~/.ccache || true
     - ls -l ~/ccache && cat ~/ccache/ccache.conf || true
     - rm -rf $CCACHE_PATH &>/dev/null || true
