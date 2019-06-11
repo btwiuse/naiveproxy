@@ -84,9 +84,9 @@ matrix:
     - export PATH=$PATH:$CCACHE_PATH:$CLCACHE_PATH:$SCCACHE_PATH
     - env
     - ls -l ~/.ccache || true
-    - ls -l ~/ccache || true
+    - ls -l ~/ccache && du -sh ~/ccache/* || true
     - which ccache.exe || true
-    - which ccache || true
+    - which ccache && ccache -s || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
   - name: Windows 32-bit
     os: windows
