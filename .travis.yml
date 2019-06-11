@@ -112,45 +112,32 @@ matrix:
     os: windows
     env:
     - PLATFORM=x86
-    - CLCACHE_DIR="$HOME/clcache"
+    - CCACHE_DIR="$HOME/ccache"
     - SCCACHE_DIR=/c/Users/travis/AppData/Local/Mozilla/sccache
-    - CLCACHE_PATH="$HOME/.clcache"
+    - CCACHE_PATH="$HOME/.ccache"
     - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
     cache:
       directories:
-      - $CLCACHE_DIR
+      - $CCACHE_DIR
       - $SCCACHE_DIR
     filter_secrets: false
     install:
-    - |
-      export CLCACHE_CL="$(cmd.exe /C '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x86 && which cl.exe' 2>&1 | tail -n1 | tr -d '\r')"
-    - |
-      export PATH=$PATH:"$(dirname $CLCACHE_CL)":$CLCACHE_PATH:$SCCACHE_PATH
+    - rm -rf $CCACHE_PATH &>/dev/null || true
+    - git clone https://github.com/nagayasu-shinya/ccache-win64 $CCACHE_PATH
+    - export PATH=$PATH:$CCACHE_PATH:$CLCACHE_PATH:$SCCACHE_PATH
     - env
-    - which cl.exe || true
-    - which cl || true
-    - ls "$HOME"/clcache || true
-    - ls "$HOME"/.clcache || true
-    - ls $LOCALAPPDATA || true
-    - ls /c/Users/travis/AppData/Local || true
-    - ls /c/Users/travis/AppData/Local/Mozilla/sccache || true
-    - ls /c/Users/travis/AppData/Local/Mozilla/sccache/cache || true
-    - "du -sh /c/Users/travis/AppData/Local/Mozilla/sccache/* || true"
-    - ls 'C:\Users\travis\AppData\Local' || true
+    - which ccache.exe || true
+    - which ccache || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
-    - "( mkdir -p $CLCACHE_PATH && cd $CLCACHE_PATH && curl -L https://github.com/frerich/clcache/releases/download/v4.2.0/clcache-4.2.0.zip --output clcache-4.2.0.zip && 7z x -y clcache-4.2.0.zip > /dev/null )"
-    - clcache -z
     script:
     - pwd
     - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
-    - clcache -s
-    - # "~/.cargo/bin/sccache -s ||:"
+    - ccache -s
     - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh )
-    - clcache -s
-    - # "~/.cargo/bin/sccache -s ||:"
+    - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
     - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
