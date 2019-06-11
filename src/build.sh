@@ -25,6 +25,7 @@ if which ccache; then
   export CCACHE_CPP2=yes
   flags="$flags"'
    cc_wrapper="ccache"'
+  ccache -s
 elif which sccache; then
   flags="$flags"'
    cc_wrapper="sccache"'
