@@ -19,22 +19,12 @@ else
     symbol_level=0"
 fi
 
-ls -l ~/.cargo/bin || true
-ls -l ~/.clcache || true
-ls -l $HOME/.cargo/bin || true
-ls -l $HOME/.clcache || true
-
 if which ccache; then
   export CCACHE_SLOPPINESS=time_macros
   export CCACHE_BASEDIR="$PWD"
   export CCACHE_CPP2=yes
   flags="$flags"'
    cc_wrapper="ccache"'
-elif which clcache; then
-  export CFLAGS="$CFLAGS -std=c++11"
-  export CXXFLAGS="$CXXFLAGS -std=c++11"
-  flags="$flags"'
-   cc_wrapper="clcache"'
 elif which sccache; then
   flags="$flags"'
    cc_wrapper="sccache"'
