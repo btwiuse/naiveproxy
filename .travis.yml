@@ -27,20 +27,21 @@ matrix:
         - sourceline: deb http://archive.ubuntu.com/ubuntu/ xenial-backports universe
     cache: ccache
     dist: xenial
-    env: ARCH=x86_64
+    env: 
+    - PLATFORM=amd64
+    - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     script:
     - pwd
     - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
-    - ( cd src; EXTRA_FLAGS='target_cpu="x64"' ./build.sh )
+    - ( cd src; ./build.sh )
     - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$ARCH"
-    - mkdir $BUILD_NAME
-    - cp -v src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - mkdir -p $BUILD_NAME
+    - cp -v $(ls -1 src/out/Release/naive{,.exe} src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
     - tar cf $BUILD_NAME.tar $BUILD_NAME
   - name: Linux Ubuntu Xenial 32-bit
     os: linux
@@ -56,22 +57,23 @@ matrix:
         - sourceline: deb http://archive.ubuntu.com/ubuntu/ xenial-backports universe
     cache: ccache
     dist: xenial
-    env: ARCH=i686
+    env: 
+    - PLATFORM=i386
+    - EXTRA_FLAGS='target_cpu="x86"' 
+    - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     script:
     - pwd
     - env
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
-    - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh ) ;true
+    - ( cd src; ./build.sh ) ;true
     - ccache -s
     - # ./tests/basic.sh src/out/Release/naive ;true
     - ls -l src/out/Release/ ;true
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$ARCH" ;true
-    - mkdir $BUILD_NAME ;true
-    - cp -v src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME ;true
-    - tar cf $BUILD_NAME.tar $BUILD_NAME ;true
-    - touch $BUILD_NAME.tar
+    - mkdir -p $BUILD_NAME
+    - cp -v $(ls -1 src/out/Release/naive{,.exe} src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
+    - tar cf $BUILD_NAME.tar $BUILD_NAME
   - name: Windows 64-bit
     os: windows
     env:
@@ -81,6 +83,7 @@ matrix:
     - CCACHE_PATH="$HOME/.ccache"
     - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
+    - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     cache:
       directories:
       - $CCACHE_DIR
@@ -104,9 +107,8 @@ matrix:
     - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
-    - mkdir $BUILD_NAME
-    - cp -v src/out/Release/naive.exe src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - mkdir -p $BUILD_NAME
+    - cp -v $(ls -1 src/out/Release/naive{,.exe} src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
     - tar cvf $BUILD_NAME.tar $BUILD_NAME
   - name: Windows 32-bit
     os: windows
@@ -117,6 +119,8 @@ matrix:
     - CCACHE_PATH="$HOME/.ccache"
     - SCCACHE_PATH="$HOME/.cargo/bin"
     - GYP_MSVS_OVERRIDE_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools"
+    - EXTRA_FLAGS='target_cpu="x86"' 
+    - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     cache:
       directories:
       - $CCACHE_DIR
@@ -136,13 +140,12 @@ matrix:
     - ./tools/import-upstream.sh
     - ( cd src; ./get-clang.sh )
     - ccache -s
-    - ( cd src; EXTRA_FLAGS='target_cpu="x86"' ./build.sh )
+    - ( cd src; ./build.sh )
     - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
-    - mkdir $BUILD_NAME
-    - cp -v src/out/Release/naive.exe src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - mkdir -p $BUILD_NAME
+    - cp -v $(ls -1 src/out/Release/naive{,.exe} src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
     - tar cvf $BUILD_NAME.tar $BUILD_NAME
   - name: MacOS Sierra 10.12 64-bit
     os: osx
@@ -152,7 +155,9 @@ matrix:
         - ninja
         - ccache
     cache: ccache
-    env: ARCH=x86_64
+    env: 
+    - PLATFORM=amd64
+    - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     osx_image: xcode9.2
     script:
     - pwd
@@ -164,7 +169,6 @@ matrix:
     - ccache -s
     - ./tests/basic.sh src/out/Release/naive
     - ls -l src/out/Release/
-    - export BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME"
-    - mkdir $BUILD_NAME
-    - cp -v src/out/Release/naive src/config.json LICENSE USAGE.txt $BUILD_NAME
+    - mkdir -p $BUILD_NAME
+    - cp -v $(ls -1 src/out/Release/naive{,.exe} src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
     - tar cf $BUILD_NAME.tar $BUILD_NAME
