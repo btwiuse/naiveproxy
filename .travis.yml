@@ -24,7 +24,7 @@ script:
 - ./tests/basic.sh src/out/Release/naive
 - ls -l src/out/Release/
 - mkdir -p $BUILD_NAME
-- cp -v $(ls -1 src/out/Release/naive{,.exe} src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
+- cp -v $(ls -1 src/out/Release/naive src/config.json LICENSE USAGE.txt 2>/dev/null) $BUILD_NAME
 - tar cf $BUILD_NAME.tar $BUILD_NAME
 matrix:
   include:
