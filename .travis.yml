@@ -77,10 +77,14 @@ matrix:
       - $SCCACHE_DIR
     filter_secrets: false
     install:
+    - ls -l ~/.ccache || true
+    - ls -l ~/ccache || true
     - rm -rf $CCACHE_PATH &>/dev/null || true
     - git clone https://github.com/nagayasu-shinya/ccache-win64 $CCACHE_PATH
     - export PATH=$PATH:$CCACHE_PATH:$CLCACHE_PATH:$SCCACHE_PATH
     - env
+    - ls -l ~/.ccache || true
+    - ls -l ~/ccache || true
     - which ccache.exe || true
     - which ccache || true
     - "choco install ninja windows-sdk-10-version-1809-all -y"
