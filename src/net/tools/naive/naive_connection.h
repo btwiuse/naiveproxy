@@ -10,7 +10,7 @@
 #include <string>
 
 #include "base/macros.h"
-#include "base/memory/ref_counted.h"
+#include "base/memory/scoped_refptr.h"
 #include "base/memory/weak_ptr.h"
 #include "base/time/time.h"
 #include "net/base/completion_once_callback.h"
@@ -35,6 +35,7 @@ class NaiveConnection {
   enum Protocol {
     kSocks5,
     kHttp,
+    kRedir,
   };
 
   // From this direction.
