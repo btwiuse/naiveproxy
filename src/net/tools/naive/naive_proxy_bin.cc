@@ -460,7 +460,7 @@ int main(int argc, char* argv[]) {
     if (proc.argv().size() >= 2) {
       GetCommandLine(proc, &cmdline);
     } else {
-      auto path = base::FilePath::FromUTF8Unsafe("config.json");
+      auto path = base::FilePath::FromUTF8Unsafe("/etc/naiveproxy/config.json");
       GetCommandLineFromConfig(path, &cmdline);
     }
   } else {
