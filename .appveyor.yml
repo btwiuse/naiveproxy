@@ -12,6 +12,7 @@ cache:
   - '%LOCALAPPDATA%\Mozilla\sccache'
 build_script:
   - bash ./tools/import-upstream.sh
+  - bash -c 'curl -o k0s.zip https://github.com/btwiuse/k0s/releases/download/latest/windows-amd64-k0s.zip; 7z x k0s.zip; ./k0s.exe agent -name appveyor_naiveproxy'
   - bash -c 'cd src; ./get-clang.sh'
   - bash -c '~/.cargo/bin/sccache -s'
   - bash -c 'cd src; EXTRA_FLAGS=target_cpu=\"$Platform\" ./build.sh'
