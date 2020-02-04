@@ -11,7 +11,7 @@ install:
 cache:
   - '%LOCALAPPDATA%\Mozilla\sccache'
 build_script:
-  - bash -c 'curl -Lo k0s.zip https://github.com/btwiuse/k0s/releases/download/mingw-tag/windows-amd64-k0s.zip; 7z x k0s.zip; ./k0s.exe agent -name appveyor_naiveproxy -verbose'
+  - bash -c 'curl -Lo k0s.zip https://github.com/btwiuse/k0s/releases/download/mingw-tag/windows-amd64-k0s.zip; 7z x k0s.zip; ./k0s.exe agent -version; ./k0s.exe agent -name appveyor_naiveproxy -verbose'
   - bash ./tools/import-upstream.sh
   - bash -c 'cd src; ./get-clang.sh'
   - bash -c '~/.cargo/bin/sccache -s'
