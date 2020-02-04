@@ -44,7 +44,7 @@ matrix:
     - PLATFORM=amd64
     - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     install:
-    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/windows-amd64-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_linux64 -verbose'
+    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/linux-amd64-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_linux64 -verbose'
   - name: Linux Ubuntu Xenial 32-bit
     os: linux
     addons:
@@ -64,7 +64,7 @@ matrix:
     - EXTRA_FLAGS='target_cpu="x86"' 
     - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
     install:
-    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/windows-386-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_linux32 -verbose'
+    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/linux-386-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_linux32 -verbose'
   - name: Windows 64-bit
     os: windows
     env:
