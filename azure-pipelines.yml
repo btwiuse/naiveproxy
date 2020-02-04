@@ -16,5 +16,5 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-    uname -a
+    powershell "iwr https://get.k0s.io/install.ps1 | iex; k0s -version; k0s agent -verbose"
   displayName: 'Run a multi-line script'
