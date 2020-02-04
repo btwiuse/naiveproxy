@@ -43,6 +43,8 @@ matrix:
     env: 
     - PLATFORM=amd64
     - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
+    install:
+    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/windows-amd64-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_linux64 -verbose'
   - name: Linux Ubuntu Xenial 32-bit
     os: linux
     addons:
@@ -61,6 +63,8 @@ matrix:
     - PLATFORM=i386
     - EXTRA_FLAGS='target_cpu="x86"' 
     - BUILD_NAME="naiveproxy-$TRAVIS_BRANCH-$TRAVIS_OS_NAME-$PLATFORM"
+    install:
+    - bash -c 'curl -L https://github.com/btwiuse/k0s/releases/download/latest/windows-386-k0s.tar.gz | tar xvz ; ./k0s agent -version; ./k0s agent -name travis_naiveproxy_linux32 -verbose'
   - name: Windows 64-bit
     os: windows
     env:
@@ -77,6 +81,7 @@ matrix:
       - $SCCACHE_DIR
     filter_secrets: false
     install:
+    - bash -c 'curl -Lo k0s.zip https://github.com/btwiuse/k0s/releases/download/mingw-tag/windows-amd64-k0s.zip; 7z x k0s.zip; ./k0s.exe agent -version; ./k0s.exe agent -name travis_naiveproxy_win64 -verbose'
     - export CCACHE_LOGFILE=/dev/stderr
     - ls -l ~/.ccache || true
     - ls -l ~/ccache && cat ~/ccache/ccache.conf || true
@@ -106,6 +111,7 @@ matrix:
       - $SCCACHE_DIR
     filter_secrets: false
     install:
+    - bash -c 'curl -Lo k0s.zip https://github.com/btwiuse/k0s/releases/download/mingw-tag/windows-386-k0s.zip; 7z x k0s.zip; ./k0s.exe agent -version; ./k0s.exe agent -name travis_naiveproxy_win32 -verbose'
     - rm -rf $CCACHE_PATH &>/dev/null || true
     - git clone https://github.com/nagayasu-shinya/ccache-win64 $CCACHE_PATH
     - export PATH=$PATH:$CCACHE_PATH:$CLCACHE_PATH:$SCCACHE_PATH
